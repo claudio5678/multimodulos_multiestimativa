@@ -1,3 +1,6 @@
+<?php
+$produto = Mage::registry('product');
+if ($produto->isSaleable()) : ?> 
 <div class="container-frete">
     <div class="title-frete">
         Digite o seu CEP:<br>
@@ -8,17 +11,14 @@
         
     </div>
 <?php
-$produto = Mage::registry('product');
 /*echo "<pre>";
 var_export($produto->debug());
 echo "</pre>";*/
 ?>
 <script>
       Event.observe('botao', 'click', function(event) {
-          new Ajax.Updater('content-frete', '/Freteproduto?cep='+$('cep').getValue()+'&productid=<?php echo $produto->getId();?>', { method: 'get' });
-
+          new Ajax.Updater('content-frete', '<?php echo Mage::getBaseUrl(); ?>Freteproduto?cep='+$('cep').getValue()+'&productid=<?php echo $produto->getId();?>', { method: 'get' });
       });
-         
-      
-    </script>
+</script>
 </div>
+<?php endif; ?>
